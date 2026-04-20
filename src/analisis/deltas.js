@@ -38,20 +38,20 @@ export async function detectarAnomalias() {
     const { id_actual, id_anterior, id_eleccion, id_ubigeo } = par;
 
     // Comparar participantes entre snapshot actual y anterior
-    const comparacion = await query(`
-      SELECT
-        curr.id_participante,
-        curr.nombre,
-        prev.votos AS votos_anterior,
-        curr.votos AS votos_actual,
-        (curr.votos - prev.votos) AS delta
-      FROM snapshots_participantes curr
-      JOIN snapshots_participantes prev
-        ON prev.id_snapshot = $2
-        AND prev.id_participante = curr.id_participante
-      WHERE curr.id_snapshot = $1
-        AND (curr.votos - prev.votos) < 0
-    `, [id_actual, id_anterior]);
+const comparacion = await query(`
+  SELECT
+    curr.id_participante,
+    COALESCE(NULLIF(curr.nombre, ''), curr.partido, 'Participante ' || curr.id_participante::text) AS nombre,
+    prev.votos AS votos_anterior,
+    curr.votos AS votos_actual,
+    (curr.votos - prev.votos) AS delta
+  FROM snapshots_participantes curr
+  JOIN snapshots_participantes prev
+    ON prev.id_snapshot = $2
+    AND prev.id_participante = curr.id_participante
+  WHERE curr.id_snapshot = $1
+    AND (curr.votos - prev.votos) < 0
+`, [id_actual, id_anterior]);
 
     for (const row of comparacion.rows) {
       // Verificar que no existe ya una alerta para este caso exacto
