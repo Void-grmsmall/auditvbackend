@@ -19,6 +19,8 @@ const httpServer = createServer(app);
 
 export const io = new SocketIO(httpServer, {
   cors: { origin: process.env.FRONTEND_URL || '*', methods: ['GET', 'POST'] },
+  transports: ['polling', 'websocket'], // 👈 polling primero como fallback
+  allowUpgrades: true,
 });
 
 io.on('connection', (socket) => {
