@@ -25,7 +25,7 @@ export async function descargarActas(idUbigeo, idEleccion, idAmbito = AMBITO.NAC
 
   while (continuar) {
     try {
-      const data = await get('/actas', {
+      const data = await get('actas', {
         pagina,
         tamanio: TAMANO_PAGINA,
         idAmbitoGeografico: idAmbito,
