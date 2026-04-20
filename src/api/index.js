@@ -17,8 +17,6 @@ import { query } from '../config/database.js';
 const app = express();
 const httpServer = createServer(app);
 
-app.set('trust proxy', 1); // Railway usa un proxy; necesario para rate-limit
-
 export const io = new SocketIO(httpServer, {
   cors: { origin: process.env.FRONTEND_URL || '*', methods: ['GET', 'POST'] },
   transports: ['polling', 'websocket'], // 👈 polling primero como fallback
