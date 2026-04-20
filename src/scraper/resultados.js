@@ -14,8 +14,8 @@ import { query } from '../config/database.js';
  */
 export async function fetchNacional(idEleccion) {
   const [totales, participantes] = await Promise.all([
-    get('/resumen-general/totales', { idEleccion, tipoFiltro: TIPO_FILTRO.ELECCION }),
-    get('/resumen-general/participantes', { idEleccion, tipoFiltro: TIPO_FILTRO.ELECCION }),
+    get('resumen-general/totales', { idEleccion, tipoFiltro: TIPO_FILTRO.ELECCION }),
+    get('resumen-general/participantes', { idEleccion, tipoFiltro: TIPO_FILTRO.ELECCION }),
   ]);
   console.log('[DEBUG totales]', JSON.stringify(totales).substring(0, 300));
   console.log('[DEBUG participantes]', JSON.stringify(participantes).substring(0, 300));
@@ -27,13 +27,13 @@ export async function fetchNacional(idEleccion) {
  */
 export async function fetchDepartamento(idEleccion, idUbigeoDepartamento, idAmbito = AMBITO.NACIONAL) {
   const [totales, participantes] = await Promise.all([
-    get('/resumen-general/totales', {
+    get('resumen-general/totales', {
       idEleccion,
       tipoFiltro: TIPO_FILTRO.UBIGEO_NIVEL_01,
       idAmbitoGeografico: idAmbito,
       idUbigeoDepartamento,
     }),
-    get('/resumen-general/participantes', {
+    get('resumen-general/participantes', {
       idEleccion,
       tipoFiltro: TIPO_FILTRO.UBIGEO_NIVEL_01,
       idAmbitoGeografico: idAmbito,
@@ -48,14 +48,14 @@ export async function fetchDepartamento(idEleccion, idUbigeoDepartamento, idAmbi
  */
 export async function fetchProvincia(idEleccion, idUbigeoDepartamento, idUbigeoProvincia, idAmbito = AMBITO.NACIONAL) {
   const [totales, participantes] = await Promise.all([
-    get('/resumen-general/totales', {
+    get('resumen-general/totales', {
       idEleccion,
       tipoFiltro: TIPO_FILTRO.UBIGEO_NIVEL_02,
       idAmbitoGeografico: idAmbito,
       idUbigeoDepartamento,
       idUbigeoProvincia,
     }),
-    get('/resumen-general/participantes', {
+    get('resumen-general/participantes', {
       idEleccion,
       tipoFiltro: TIPO_FILTRO.UBIGEO_NIVEL_02,
       idAmbitoGeografico: idAmbito,
@@ -71,7 +71,7 @@ export async function fetchProvincia(idEleccion, idUbigeoDepartamento, idUbigeoP
  */
 export async function fetchDistrito(idEleccion, idUbigeoDepartamento, idUbigeoProvincia, idUbigeoDistrito, idAmbito = AMBITO.NACIONAL) {
   const [totales, participantes] = await Promise.all([
-    get('/resumen-general/totales', {
+    get('resumen-general/totales', {
       idEleccion,
       tipoFiltro: TIPO_FILTRO.UBIGEO_NIVEL_03,
       idAmbitoGeografico: idAmbito,
