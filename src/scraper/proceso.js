@@ -11,7 +11,7 @@ import { get } from './client.js';
  * @returns {{ idProceso: number, nombre: string }}
  */
 export async function obtenerProcesoActivo() {
-  const data = await get('/proceso/proceso-electoral-activo');
+  const data = await get('proceso/proceso-electoral-activo');
   return data;
 }
 
@@ -22,7 +22,7 @@ export async function obtenerProcesoActivo() {
  * @returns {Array<{ id, nombre, tipo }>}
  */
 export async function obtenerElecciones(idProceso) {
-  const data = await get(`/proceso/${idProceso}/elecciones`);
+  const data = await get(`proceso/${idProceso}/elecciones`);
   return Array.isArray(data) ? data : data?.elecciones ?? [];
 }
 
@@ -33,7 +33,7 @@ export async function obtenerElecciones(idProceso) {
  * @returns {Array}
  */
 export async function obtenerEleccionesActivas(idProceso) {
-  const data = await get('/resumen-general/elecciones', {
+  const data = await get('resumen-general/elecciones', {
     activo: 1,
     idProceso,
     tipoFiltro: 'eleccion',
@@ -47,6 +47,6 @@ export async function obtenerEleccionesActivas(idProceso) {
  * @returns {Array}
  */
 export async function obtenerDistritosElectorales() {
-  const data = await get('/distrito-electoral/distritos');
+  const data = await get('distrito-electoral/distritos');
   return Array.isArray(data) ? data : data?.distritos ?? [];
 }
