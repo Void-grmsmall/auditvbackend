@@ -156,6 +156,9 @@ export async function ejecutarScraping() {
 }
 
 // Ejecución directa (node src/scraper/index.js)
-if (process.argv[1].endsWith('index.js')) {
+// Guarda específica: solo ejecutar si el script principal es ESTE archivo del scraper
+const __scraperFile = new URL(import.meta.url).pathname;
+const __mainScript  = process.argv[1]?.replace(/\\/g, '/');
+if (__mainScript && __scraperFile.endsWith(__mainScript.replace(/.*src/, 'src'))) {
   ejecutarScraping().then(() => process.exit(0)).catch(console.error);
 }

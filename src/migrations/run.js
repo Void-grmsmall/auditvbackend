@@ -11,7 +11,12 @@ import pg from 'pg';
 const { Pool } = pg;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production'
+    ? { rejectUnauthorized: false }
+    : false,
+});
 
 const migrations = [
   '001_crear_tablas.sql',
