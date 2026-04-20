@@ -85,10 +85,10 @@ export async function persistirSnapshot(idEleccion, tipoFiltro, idUbigeo, totale
   const rawData = unwrap(participantesRaw);
   const participantes = Array.isArray(rawData) ? rawData : [];
 
-  for (const p of participantes) {
+for (const p of participantes) {
     const idParticipante = p.codigoAgrupacionPolitica ?? p.idParticipante ?? p.id_participante ?? p.id ?? null;
-    const nombre         = p.nombreCandidato          ?? p.nombre         ?? p.candidato       ?? '';
     const partido        = p.nombreAgrupacionPolitica ?? p.partido        ?? p.organizacion    ?? '';
+    const nombre         = p.nombreCandidato ?? p.nombre ?? p.candidato ?? partido; // ← usa partido como fallback
     const votos          = parseInt(p.totalVotosValidos ?? p.votos        ?? p.totalVotos      ?? 0) || 0;
     const porcentaje     = parseFloat(p.porcentajeVotosValidos ?? p.porcentaje ?? p.porcentajeVoto ?? 0) || 0;
 
@@ -97,7 +97,7 @@ export async function persistirSnapshot(idEleccion, tipoFiltro, idUbigeo, totale
         (id_snapshot, id_participante, nombre, partido, votos, porcentaje)
       VALUES ($1,$2,$3,$4,$5,$6)
     `, [snapshotId, idParticipante, nombre, partido, votos, porcentaje]);
-  }
+}
 
   return snapshotId;
 }
