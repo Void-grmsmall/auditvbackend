@@ -63,6 +63,20 @@ app.use((err, _req, res, _next) => {
 
 const PORT = parseInt(process.env.PORT || '3000');
 
+import { execSync } from 'child_process';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+try {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const runJsPath = path.join(__dirname, '../migrations/run.js');
+  console.log('[API] Ejecutando migraciones SQL...');
+  execSync(`node "${runJsPath}"`, { stdio: 'inherit' });
+} catch (error) {
+  console.error('[API] ❌ Las migraciones fallaron. Deteniendo inicio.');
+  process.exit(1);
+}
+
 // ✅ '0.0.0.0' para que Railway pueda alcanzar el servidor
 httpServer.listen(PORT, '0.0.0.0', () => {
   console.log(`\n🗳️ AuditaVoto API corriendo en puerto ${PORT}`);
