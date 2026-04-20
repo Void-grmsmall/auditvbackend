@@ -54,17 +54,18 @@ const comparacion = await query(`
 `, [id_actual, id_anterior]);
 
     for (const row of comparacion.rows) {
-      // Verificar que no existe ya una alerta para este caso exacto
-      // Verificar que no existe ya una alerta para este caso exacto
+      // Verificar que no existe ya una alerta para este par exacto de valores
       const yaExiste = await query(`
         SELECT id FROM alertas
         WHERE tipo = 'votos_bajan'
           AND id_eleccion = $1
           AND id_participante = $2
           AND id_ubigeo IS NOT DISTINCT FROM $3
-          AND generada_en > NOW() - INTERVAL '10 minutes'
+          AND valor_anterior = $4::text
+          AND valor_actual   = $5::text
         LIMIT 1
-      `, [id_eleccion, row.id_participante, id_ubigeo]);
+      `, [id_eleccion, row.id_participante, id_ubigeo,
+          String(row.votos_anterior), String(row.votos_actual)]);
 
       if (yaExiste.rows.length > 0) continue;
 
