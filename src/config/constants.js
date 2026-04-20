@@ -4,7 +4,6 @@
  */
 
 export const ONPE_BASE_URL =
-  process.env.ONPE_BASE_URL ||
   'https://resultadoelectoral.onpe.gob.pe/presentacion-backend';
 
 export const ONPE_ID_PROCESO = parseInt(process.env.ONPE_ID_PROCESO || '2');
