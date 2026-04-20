@@ -10,7 +10,7 @@ import { AMBITO } from '../config/constants.js';
  * @param {number} idAmbito - 1=nacional, 2=extranjero
  */
 export async function obtenerDepartamentos(idEleccion, idAmbito = AMBITO.NACIONAL) {
-  const data = await get('/ubigeos/departamentos', {
+  const data = await get('ubigeos/departamentos', {
     idEleccion,
     idAmbitoGeografico: idAmbito,
   });
@@ -24,7 +24,7 @@ export async function obtenerDepartamentos(idEleccion, idAmbito = AMBITO.NACIONA
  * @param {number} idAmbito
  */
 export async function obtenerProvincias(idEleccion, idUbigeoDepartamento, idAmbito = AMBITO.NACIONAL) {
-  const data = await get('/ubigeos/provincias', {
+  const data = await get('ubigeos/provincias', {
     idEleccion,
     idAmbitoGeografico: idAmbito,
     idUbigeoDepartamento,
@@ -39,7 +39,7 @@ export async function obtenerProvincias(idEleccion, idUbigeoDepartamento, idAmbi
  * @param {number} idAmbito
  */
 export async function obtenerDistritos(idEleccion, idUbigeoProvincia, idAmbito = AMBITO.NACIONAL) {
-  const data = await get('/ubigeos/distritos', {
+  const data = await get('ubigeos/distritos', {
     idEleccion,
     idAmbitoGeografico: idAmbito,
     idUbigeoProvincia,
