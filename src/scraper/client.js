@@ -7,6 +7,8 @@
 import axios from 'axios';
 import { ONPE_BASE_URL, REQUEST_DELAY_MS, MAX_RETRIES, TIMEOUT_MS, USER_AGENT } from '../config/constants.js';
 
+console.log('[CLIENT] ONPE_BASE_URL en uso:', ONPE_BASE_URL); // ← agrega esta línea
+
 // Instancia axios configurada
 const http = axios.create({
   baseURL: ONPE_BASE_URL,
