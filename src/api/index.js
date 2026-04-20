@@ -91,7 +91,7 @@ app.use((err, _req, res, _next) => {
 
 // ── Arrancar servidor ─────────────────────────────────────
 const PORT = parseInt(process.env.PORT || '3000');
-httpServer.listen(PORT, () => {
+httpServer.listen(PORT, '0.0.0.0', () => {
   console.log(`\n🗳️  AuditaVoto API corriendo en puerto ${PORT}`);
   console.log(`   Health: http://localhost:${PORT}/health`);
   console.log(`   NODE_ENV: ${process.env.NODE_ENV || 'development'}\n`);
