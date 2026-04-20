@@ -61,11 +61,11 @@ const comparacion = await query(`
           AND id_eleccion = $1
           AND id_participante = $2
           AND id_ubigeo IS NOT DISTINCT FROM $3
-          AND valor_anterior = $4::text
-          AND valor_actual   = $5::text
+          AND valor_anterior = $4
+          AND valor_actual   = $5
         LIMIT 1
       `, [id_eleccion, row.id_participante, id_ubigeo,
-          String(row.votos_anterior), String(row.votos_actual)]);
+          row.votos_anterior, row.votos_actual]);
 
       if (yaExiste.rows.length > 0) continue;
 
