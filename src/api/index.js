@@ -15,6 +15,7 @@ import estadisticasRouter from './routes/estadisticas.js';
 import { query } from '../config/database.js';
 
 const app = express();
+app.set('trust proxy', 1); // Confiar en el primer proxy (Railway)
 const httpServer = createServer(app);
 
 export const io = new SocketIO(httpServer, {
