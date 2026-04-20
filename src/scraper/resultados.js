@@ -17,6 +17,9 @@ export async function fetchNacional(idEleccion) {
     get('/resumen-general/totales', { idEleccion, tipoFiltro: TIPO_FILTRO.ELECCION }),
     get('/resumen-general/participantes', { idEleccion, tipoFiltro: TIPO_FILTRO.ELECCION }),
   ]);
+  // DIAGNÓSTICO TEMPORAL
+  console.log('[DEBUG totales]', JSON.stringify(totales));
+  console.log('[DEBUG participantes keys]', JSON.stringify(Object.keys(participantes || {})));
   return { totales, participantes, nivel: 0, idUbigeo: null };
 }
 

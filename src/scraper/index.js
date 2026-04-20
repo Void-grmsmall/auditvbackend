@@ -129,6 +129,8 @@ export async function ejecutarScraping() {
     // 1. Obtener proceso activo
     const proceso = await obtenerProcesoActivo();
     const idProceso = proceso?.idProceso ?? proceso?.id ?? ONPE_ID_PROCESO;
+    console.log('[DEBUG] proceso raw:', JSON.stringify(proceso));
+    console.log('[DEBUG] idProceso usado:', idProceso);
 
     // 2. Obtener elecciones activas
     const eleccionesRaw = await obtenerElecciones(idProceso);
