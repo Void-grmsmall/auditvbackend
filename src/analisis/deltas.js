@@ -55,6 +55,7 @@ const comparacion = await query(`
 
     for (const row of comparacion.rows) {
       // Verificar que no existe ya una alerta para este caso exacto
+      // Verificar que no existe ya una alerta para este caso exacto
       const yaExiste = await query(`
         SELECT id FROM alertas
         WHERE tipo = 'votos_bajan'
